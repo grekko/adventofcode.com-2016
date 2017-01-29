@@ -20,13 +20,19 @@ defmodule ElfHQ do
   def run do
     { :ok, input } = File.read("input.txt")
     movements = String.split(input, ", ")
-    walk([ movements, [ 0, 0, :north ]])
+    walk([ movements, [ 0, 0, :north ], []])
   end
 
   # final step
   # Thw movements list is empty, so we reached our target.
-  def walk([[], [ x, y, orientation ]]) do
-    IO.puts "Arrived at: #{x}, #{y} looking towards #{orientation}. So the distance is #{x+y}"
+  def walk([[], [ x, y, orientation ], walklog]) do
+    [ hq_x, hq_y ] = detect_hq(walklog)
+    manhattan_distance = :erlang.abs(x) + :erlang.abs(y)
+    actual_hq_distance = :erlang.abs(hq_x) + :erlang.abs(hq_y)
+    IO.puts("---------------------------------")
+    IO.puts("Arrived at [#{x}, #{y}], looking at #{orientation}, distance: #{manhattan_distance}.")
+    IO.puts("The actual hq is at [#{hq_x}, #{hq_y}], distance: #{actual_hq_distance}")
+    IO.puts("---------------------------------")
   end
 
   # processing the movements
@@ -34,7 +40,7 @@ defmodule ElfHQ do
   # 2. Extract the rotation and distance (steps to move)
   # 3. Calculate new_orientation and apply distance to calculate new position
   # 4. Call the same method with the new_orientation, updated position and tail of movements
-  def walk([[ movement | tail ], [ x, y, orientation ]]) do
+  def walk([[ movement | tail ], [ x, y, orientation ], walklog]) do
     <<rotate_to::8, distance_binary::binary>> = movement
     # :string.to_integer is an Erlang function that translates a char list (List of codepoints)
     # to the integer it represents. The second return value is a rest in case of a decimal value, e.g. "0.5"
@@ -47,7 +53,28 @@ defmodule ElfHQ do
     new_orientation = navigate(orientation, rotate_to)
     { x1, y1 } = move(new_orientation, x, y, distance)
     IO.puts("Turning #{orientation} -> #{new_orientation}. Taking #{distance} step(s) from [#{x}, #{y}] to [#{x1}, #{y1}]")
-    walk([tail, [ x1, y1, new_orientation ]])
+    walk([tail, [ x1, y1, new_orientation ], walklog ++ [[ x, y ]]])
+  end
+
+  # Detects the first position in the walklog that has been visited twice.
+  defp detect_hq(walklog) do
+    duplicate_positions = detect_duplicates(walklog, 0, [])
+    # TODO: think more clearly about the problen ;)
+    IO.inspect(duplicate_positions)
+    [ 0, 0 ]
+  end
+
+  defp detect_duplicates([ position | walklog ], index, duplicates) do
+    if Enum.member?(walklog, position) do
+      distance = Enum.find_index(walklog, fn(x) -> x == position end)
+      detect_duplicates(walklog, index + 1, duplicates ++ [ index, distance, index + distance, position ])
+    else
+      detect_duplicates(walklog, index + 1, duplicates)
+    end
+  end
+
+  defp detect_duplicates([], index, duplicates) do
+    duplicates
   end
 
   defp move(orientation, x, y, distance) do
