@@ -1,7 +1,22 @@
-# [ ['R', '2', 'R', '2', … '\m'], [x, y] ]
+# Day 1: No Time for a Taxicab
+# http://adventofcode.com/2016/day/1
+#
+# 1st Riddle:
+# The task is to calculate the so called Manhattan distance[1] for
+# a given set of movement instructions. The instructions are in the
+# format of "Rn" or "Ln" where n is a positive Integer and "R" or "L"
+# stand for a 90-degree turn either to the left or right.
+#
+# [1]: https://en.wikipedia.org/wiki/Taxicab_geometry
+
 require IEx;
+# Required to enable usage of `IEx.pry` for debugging.
 
 defmodule ElfHQ do
+  # entry-point
+  # 1. Reads given input file, returns BitString <<82, 42, …>>
+  # 2. Splits BitString into List of BitStrings ["R1", "L1", …]
+  # 3. Delegates to walk
   def run do
     { :ok, input } = File.read("input.txt")
     movements = String.split(input, ", ")
@@ -16,7 +31,6 @@ defmodule ElfHQ do
     IO.inspect(movement)
     <<rotate_to::8, distance_binary::binary>> = movement
     { distance, _ } = :string.to_integer(to_char_list(distance_binary))
-    # IEx.pry
     new_orientation = navigate(orientation, rotate_to)
     { x1, y1 } = move(new_orientation, x, y, distance)
     IO.puts("Looking #{orientation}, turning #{new_orientation}. Going by #{distance}")
