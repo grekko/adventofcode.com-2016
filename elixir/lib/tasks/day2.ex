@@ -10,7 +10,10 @@ defmodule Mix.Tasks.Day2 do
     { :ok, input } = File.read("inputs/day2.txt")
     instruction_lines = String.split(input, "\n")
     instructions = Enum.map(instruction_lines, fn(line) -> to_charlist(line) end)
-    IO.inspect(instructions)
+    instructions = Enum.reject(instructions, fn(line) -> Enum.empty?(line) end)
+    codes = access_bathroom(instructions)
+    IO.puts("Try those numbers:")
+    IO.inspect(codes)
   end
 
   @doc """
@@ -18,16 +21,34 @@ defmodule Mix.Tasks.Day2 do
 
   ## Examples
 
-      iex> Mix.Tasks.Day2.access_bathroom(["U", "L", "L"])
-      :world
+      iex> Mix.Tasks.Day2.access_bathroom([[?D, ?L]])
+      [7]
+
+      iex> Mix.Tasks.Day2.access_bathroom([[?D, ?L], [?R, ?R, ?R, ?D, ?D]])
+      [7, 9]
+
+      iex> Mix.Tasks.Day2.access_bathroom([[?D, ?L], [?R, ?R, ?R, ?D, ?D], [?U, ?U, ?U, ?L, ?D]])
+      [7, 9, 5]
 
   """
-  def access_bathroom(_instructions) do
+  def access_bathroom(instructions) do
     # 1. Start with a position
     # 2. Transform all moves to positional changes
     # 3. Gather final digits for each line of positional changes
     #    Using the last digit of the previous line as a starter for the next
-    :world
+    movements = Enum.map(instructions, fn(charlist) -> Enum.map(charlist, fn(char) -> char_to_movement(char) end) end)
+    # positions = Enum.map(movements, fn(movement) -> move_around_keypad([1, 1], movement) end)
+    positions = reduce_positions(movements, [[1, 1]])
+    Enum.map(positions, fn(position) -> position_to_keypad_digit(position) end)
+  end
+
+  def reduce_positions([ movement | rest ], results) do
+    start_position = List.last(results)
+    reduce_positions(rest, results ++ [ move_around_keypad(start_position, movement) ])
+  end
+
+  def reduce_positions([ ], [ _head | results ]) do
+    results
   end
 
   @doc """
@@ -62,12 +83,26 @@ defmodule Mix.Tasks.Day2 do
 
   ## Examples
 
-      iex> Mix.Tasks.Day2.char_to_movement('U')
+      iex> Mix.Tasks.Day2.char_to_movement(?U)
       [0, -1]
+
+      iex> Mix.Tasks.Day2.char_to_movement(?D)
+      [0, 1]
+
+      iex> Mix.Tasks.Day2.char_to_movement(?L)
+      [-1, 0]
+
+      iex> Mix.Tasks.Day2.char_to_movement(?R)
+      [1, 0]
 
   """
   def char_to_movement(char) do
-    [0, -1]
+    case char do
+      ?U -> [0, -1]
+      ?D -> [0, 1]
+      ?R -> [1, 0]
+      ?L -> [-1, 0]
+    end
   end
 
   @doc """

@@ -1,8 +1,8 @@
-defmodule Day2.Mixfile do
+defmodule AdventOfCode2016.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :day2,
+    [app: :advent_of_code,
      version: "0.1.0",
      elixir: "~> 1.4",
      build_embedded: Mix.env == :prod,
