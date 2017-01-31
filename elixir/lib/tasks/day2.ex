@@ -12,8 +12,12 @@ defmodule Mix.Tasks.Day2 do
     instructions = Enum.map(instruction_lines, fn(line) -> to_charlist(line) end)
     instructions = Enum.reject(instructions, fn(line) -> Enum.empty?(line) end)
     codes = access_bathroom(instructions)
-    IO.puts("Try those numbers:")
+    IO.puts("Try those simple numbers:")
     IO.inspect(codes)
+
+    crazy_codes = access_crazy_bathroom(instructions)
+    IO.puts("Try those crazy numbers:")
+    IO.inspect(crazy_codes)
   end
 
   @doc """
@@ -32,12 +36,7 @@ defmodule Mix.Tasks.Day2 do
 
   """
   def access_bathroom(instructions) do
-    # 1. Start with a position
-    # 2. Transform all moves to positional changes
-    # 3. Gather final digits for each line of positional changes
-    #    Using the last digit of the previous line as a starter for the next
     movements = Enum.map(instructions, fn(charlist) -> Enum.map(charlist, fn(char) -> char_to_movement(char) end) end)
-    # positions = Enum.map(movements, fn(movement) -> move_around_keypad([1, 1], movement) end)
     positions = reduce_positions(movements, [[1, 1]])
     Enum.map(positions, fn(position) -> position_to_keypad_digit(position) end)
   end
@@ -49,6 +48,60 @@ defmodule Mix.Tasks.Day2 do
 
   def reduce_positions([ ], [ _head | results ]) do
     results
+  end
+
+  def access_crazy_bathroom(instructions) do
+    movements = Enum.map(instructions, fn(charlist) -> Enum.map(charlist, fn(char) -> char_to_movement(char) end) end)
+    positions = reduce_crazy_positions(movements, [[0, 2]])
+    Enum.map(positions, fn(position) -> position_to_crazy_keypad_char(position) end)
+  end
+
+  def reduce_crazy_positions([ movement | rest ], results) do
+    start_position = List.last(results)
+    reduce_crazy_positions(rest, results ++ [ move_around_crazy_keypad(start_position, movement) ])
+  end
+
+  def reduce_crazy_positions([ ], [ _head | results ]) do
+    results
+  end
+
+  @doc """
+  Moves around a figurative keypad, respecting the physical boundaries,
+  returning the final selected digit.
+
+  ## Examples
+
+      iex> Mix.Tasks.Day2.move_around_crazy_keypad([2, 0], [[-1, 0]])
+      [2, 0]
+
+      iex> Mix.Tasks.Day2.move_around_crazy_keypad([2, 0], [[1, 0]])
+      [2, 0]
+
+      iex> Mix.Tasks.Day2.move_around_crazy_keypad([2, 0], [[0, -1]])
+      [2, 0]
+
+      iex> Mix.Tasks.Day2.move_around_crazy_keypad([2, 0], [[0, 1]])
+      [2, 1]
+
+
+  """
+  def move_around_crazy_keypad([x, y], [ [x1, y1] | remaining ]) do
+    npos = Enum.find([[ x+x1, y+y1 ], [x, y]], fn(pos) -> Enum.member?(valid_positions_on_crazy_keypad(), pos) end)
+    move_around_crazy_keypad(npos, remaining)
+  end
+
+  def move_around_crazy_keypad([x, y], [ ]) do
+    [x, y]
+  end
+
+  def valid_positions_on_crazy_keypad do
+    [
+      [2, 0],
+      [1, 1], [2, 1], [3, 1],
+      [0, 2], [1, 2], [2, 2], [3, 2], [4, 2],
+      [1, 3], [2, 3], [3, 3],
+      [2, 4],
+    ]
   end
 
   @doc """
@@ -149,6 +202,68 @@ defmodule Mix.Tasks.Day2 do
       { 0, 2 } -> 7
       { 1, 2 } -> 8
       { 2, 2 } -> 9
+    end
+  end
+
+  @doc """
+  Maps a x/y position to the crazy keypad char.
+
+  ## Examples
+
+      iex> Mix.Tasks.Day2.position_to_crazy_keypad_char([2, 0])
+      ?1
+
+      iex> Mix.Tasks.Day2.position_to_crazy_keypad_char([1, 1])
+      ?2
+
+      iex> Mix.Tasks.Day2.position_to_crazy_keypad_char([2, 1])
+      ?3
+
+      iex> Mix.Tasks.Day2.position_to_crazy_keypad_char([3, 1])
+      ?4
+
+      iex> Mix.Tasks.Day2.position_to_crazy_keypad_char([0, 2])
+      ?5
+
+      iex> Mix.Tasks.Day2.position_to_crazy_keypad_char([1, 2])
+      ?6
+
+      iex> Mix.Tasks.Day2.position_to_crazy_keypad_char([2, 2])
+      ?7
+
+      iex> Mix.Tasks.Day2.position_to_crazy_keypad_char([3, 2])
+      ?8
+
+      iex> Mix.Tasks.Day2.position_to_crazy_keypad_char([4, 2])
+      ?9
+
+      iex> Mix.Tasks.Day2.position_to_crazy_keypad_char([1, 3])
+      ?A
+
+      iex> Mix.Tasks.Day2.position_to_crazy_keypad_char([2, 3])
+      ?B
+
+      iex> Mix.Tasks.Day2.position_to_crazy_keypad_char([3, 3])
+      ?C
+
+      iex> Mix.Tasks.Day2.position_to_crazy_keypad_char([2, 4])
+      ?D
+  """
+  def position_to_crazy_keypad_char([x, y]) do
+    case { x, y } do
+      { 2, 0 } -> ?1
+      { 1, 1 } -> ?2
+      { 2, 1 } -> ?3
+      { 3, 1 } -> ?4
+      { 0, 2 } -> ?5
+      { 1, 2 } -> ?6
+      { 2, 2 } -> ?7
+      { 3, 2 } -> ?8
+      { 4, 2 } -> ?9
+      { 1, 3 } -> ?A
+      { 2, 3 } -> ?B
+      { 3, 3 } -> ?C
+      { 2, 4 } -> ?D
     end
   end
 
