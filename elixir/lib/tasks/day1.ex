@@ -9,19 +9,15 @@
 #
 # [1]: https://en.wikipedia.org/wiki/Taxicab_geometry
 
-defmodule Day1 do
-  use Application
-
-  def start(_type, _args) do
-    run
-  end
+defmodule Mix.Tasks.Day1 do
+  use Mix.Task
 
   # entry-point
   # 1. Reads given input file, returns BitString <<82, 42, …>>
   # 2. Splits BitString into List of BitStrings ["R1", "L1", …]
   # 3. Delegates to walk with initial position and orientation
-  def run do
-    { :ok, input } = File.read("input.txt")
+  def run(_args) do
+    { :ok, input } = File.read("inputs/day1.txt")
     movements = String.split(input, ", ")
     walklog = start_walking(movements)
 
@@ -43,10 +39,10 @@ defmodule Day1 do
 
   ## Examples
 
-      iex> Day1.start_walking(["R1", "R1", "R1", "R1"])
+      iex> Mix.Tasks.Day1.start_walking(["R1", "R1", "R1", "R1"])
       [[0, 0], [1, 0], [1, 1], [0, 1], [0, 0]]
 
-      iex> Day1.start_walking(["R2", "L1", "L2", "L1"])
+      iex> Mix.Tasks.Day1.start_walking(["R2", "L1", "L2", "L1"])
       [[0, 0], [1, 0], [2, 0], [2, -1], [1, -1], [0, -1], [0, 0]]
 
   """
@@ -60,10 +56,10 @@ defmodule Day1 do
 
   ## Examples
 
-      iex> Day1.manhattan_distance(1, 1)
+      iex> Mix.Tasks.Day1.manhattan_distance(1, 1)
       2
 
-      iex> Day1.manhattan_distance(14, -4)
+      iex> Mix.Tasks.Day1.manhattan_distance(14, -4)
       18
 
   """
@@ -76,16 +72,16 @@ defmodule Day1 do
 
   ## Examples
 
-      iex> Day1.steps(0, 0, 1, 0)
+      iex> Mix.Tasks.Day1.steps(0, 0, 1, 0)
       [[1, 0]]
 
-      iex> Day1.steps(0, 0, 3, 0)
+      iex> Mix.Tasks.Day1.steps(0, 0, 3, 0)
       [[1, 0], [2, 0], [3, 0]]
 
-      iex> Day1.steps(0, 0, 0, -3)
+      iex> Mix.Tasks.Day1.steps(0, 0, 0, -3)
       [[0, -1], [0, -2], [0, -3]]
 
-      iex> Day1.steps(-14, 44, -14, 41)
+      iex> Mix.Tasks.Day1.steps(-14, 44, -14, 41)
       [[-14, 43], [-14, 42], [-14, 41]]
 
   """
@@ -102,7 +98,7 @@ defmodule Day1 do
 
   ## Examples
 
-      iex> Day1.detect_hq([[0, 0], [1, 0], [2, 0], [2, 1], [1, 1], [1, 0], [1, -1], [0, -1], [0, 0]])
+      iex> Mix.Tasks.Day1.detect_hq([[0, 0], [1, 0], [2, 0], [2, 1], [1, 1], [1, 0], [1, -1], [0, -1], [0, 0]])
       [1, 0]
 
   """
