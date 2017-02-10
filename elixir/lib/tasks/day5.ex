@@ -95,12 +95,13 @@ defmodule Mix.Tasks.Day5 do
 
   ## Examples
 
-      iex> Mix.Tasks.Day5.crack_tougher_password("abc", ["a", nil, "a", "a", "a", "a", "a", "a"], 323000)
+      iex> Mix.Tasks.Day5.crack_tougher_password("abc", ["a", nil, "a", "a", "a", "a", "a", "a"], 3231929)
       "a5aaaaaa"
 
   """
   def crack_tougher_password(input, password \\ [nil, nil, nil, nil, nil, nil, nil, nil], counter \\ 1) do
-    IO.puts("Current password: #{Enum.map(password, fn(x) -> if x == nil, do: "_", else: x end) |> Enum.join}, counter: #{counter}")
+    # TODO: Move this into run
+    # IO.puts("Current password: #{Enum.map(password, fn(x) -> if x == nil, do: "_", else: x end) |> Enum.join}, counter: #{counter}")
     if Enum.all?(password) do
       Enum.join(password)
     else
