@@ -40,12 +40,20 @@
 #
 # For example, if the Door ID is abc:
 #
-# The first interesting hash is from abc3231929, which produces 0000015...; so, 5 goes in position 1: _5______.
-# In the previous method, 5017308 produced an interesting hash; however, it is ignored, because it specifies an invalid position (8).
-# The second interesting hash is at index 5357525, which produces 000004e...; so, e goes in position 4: _5__e___.
-# You almost choke on your popcorn as the final character falls into place, producing the password 05ace8e3.
+# The first interesting hash is from abc3231929, which produces 0000015...;
+# so, 5 goes in position 1: _5______.
 #
-# Given the actual Door ID and this new method, what is the password? Be extra proud of your solution if it uses a cinematic "decrypting" animation.
+# In the previous method, 5017308 produced an interesting hash; however, it is ignored,
+# because it specifies an invalid position (8).
+#
+# The second interesting hash is at index 5357525, which produces 000004e...;
+# so, e goes in position 4: _5__e___.
+#
+# You almost choke on your popcorn as the final character falls into place,
+# producing the password 05ace8e3.
+#
+# Given the actual Door ID and this new method, what is the password? Be extra
+# proud of your solution if it uses a cinematic "decrypting" animation.
 #
 defmodule Mix.Tasks.Day5 do
   use Mix.Task
@@ -53,13 +61,13 @@ defmodule Mix.Tasks.Day5 do
   def run(_args) do
     { :ok, input } = File.read("inputs/day5.txt")
     input = String.split(input, "\n") |> List.first
-    password = crack_password(input)
+    # password = crack_password(input)
     tough_password = crack_tougher_password(input)
 
     IO.inspect(input)
 
     IO.puts("---------------------------------")
-    IO.puts("Password: #{password}")
+    # IO.puts("Password: #{password}")
     IO.puts("Tough Password: #{tough_password}")
     IO.puts("---------------------------------")
   end
@@ -87,21 +95,26 @@ defmodule Mix.Tasks.Day5 do
 
   ## Examples
 
-      iex> Mix.Tasks.Day5.crack_tougher_password("abc", [nil, "a", "a", "a", "a", "a", "a", "a"], 3231928)
-      "5aaaaaaa"
+      iex> Mix.Tasks.Day5.crack_tougher_password("abc", ["a", nil, "a", "a", "a", "a", "a", "a"], 323000)
+      "a5aaaaaa"
 
   """
   def crack_tougher_password(input, password \\ [nil, nil, nil, nil, nil, nil, nil, nil], counter \\ 1) do
+    IO.puts("Current password: #{Enum.map(password, fn(x) -> if x == nil, do: "_", else: x end) |> Enum.join}, counter: #{counter}")
     if Enum.all?(password) do
       Enum.join(password)
     else
       %{ id: id, hash: hash } = find_hash(input, counter)
       # LEARNING: handle indifferent return types e.g. tuple (success) vs. atom (:error) with `cond`
       position = case String.at(hash, 5) |> Integer.parse do
-        { position, _ } -> position
+        { position, _ } -> if position >= 0 and position < 8, do: position, else: :error
         :error -> :error
       end
-      password = if position != :error, do: List.replace_at(password, position-1, String.at(hash, 6)), else: password
+      password = if position != :error and Enum.at(password, position) == nil do
+        List.replace_at(password, position, String.at(hash, 6))
+      else
+        password
+      end
       crack_tougher_password(input, password, id+1)
     end
   end
