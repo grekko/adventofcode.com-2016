@@ -1,0 +1,256 @@
+    <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.14.5">
+    <title>Mix.Tasks.Day6 – advent_of_code v0.1.0</title>
+    <link rel="stylesheet" href="dist/app-a07cea761b.css" />
+    
+    <script src="dist/sidebar_items-655f2d9970.js"></script>
+  </head>
+  <body data-type="modules">
+    <script>if(localStorage.getItem('night-mode')) document.body.className += ' night-mode';</script>
+
+    <div class="main">
+<button class="sidebar-toggle">
+  <i class="icon-menu"></i>
+</button>
+<section class="sidebar">
+
+  
+  <a href="api-reference.html" class="sidebar-projectLink">
+    <div class="sidebar-projectDetails">
+      <h1 class="sidebar-projectName">
+        advent_of_code
+      </h1>
+      <h2 class="sidebar-projectVersion">
+        v0.1.0
+      </h2>
+    </div>
+    
+  </a>
+
+  <div class="sidebar-search">
+    <i class="icon-search"></i>
+    <input type="text" class="sidebar-searchInput" placeholder="search" autocomplete="off" />
+  </div>
+
+  <ul class="sidebar-listNav">
+    <li><a id="extras-list" href="#full-list">Pages</a></li>
+
+    
+      <li><a id="modules-list" href="#full-list">Modules</a></li>
+    
+
+    
+
+    
+  </ul>
+  <div class="gradient"></div>
+  <ul id="full-list" class="sidebar-fullList"></ul>
+</section>
+
+<section class="content">
+  <div class="content-outer">
+    <div id="content" class="content-inner">
+
+
+      <h1>
+        <small class="visible-xs">advent_of_code v0.1.0</small>
+        Mix.Tasks.Day6
+        
+        
+      </h1>
+
+      
+
+      
+        <section id="summary" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#summary">
+              <i class="icon-link"></i>
+            </a>
+            Summary
+          </h1>
+          
+
+          
+  <div class="summary-functions summary">
+    <h2>
+      <a href="#functions">Functions</a>
+    </h2>
+    <div class="summary-row">
+  <div class="summary-signature">
+    <a href="#ocurrences_sum/1">ocurrences_sum(string)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Counts occurences of letters in a multi-line string, sums and sorts by sum</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#parse/1">parse(list)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Counts occurences of letters, sorts them by sum</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#run/1">run(args)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>A task needs to implement <code class="inline">run</code> which receives
+a list of command line args</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#transpose/1">transpose(list)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Tranposes a matrix. Think of: Flips rows and columns in a spreadsheet</p>
+</div>
+  
+</div>
+
+  </div>
+
+
+          
+
+          
+
+        </section>
+      
+
+      
+
+      
+        <section id="functions" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#functions">
+              <i class="icon-link"></i>
+            </a>
+            Functions
+          </h1>
+          <div class="detail" id="ocurrences_sum/1">
+  
+  <div class="detail-header">
+    <a href="#ocurrences_sum/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">ocurrences_sum(string)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Counts occurences of letters in a multi-line string, sums and sorts by sum.</p>
+<h2 id="ocurrences_sum/1-examples" class="section-heading">
+  <a href="#ocurrences_sum/1-examples" class="hover-link"><i class="icon-link"></i></a>
+  Examples
+</h2>
+
+<pre><code class="iex elixir">iex&gt; Mix.Tasks.Day6.ocurrences_sum(&quot;abc\naac\nacc\nbbc\n&quot;)
+[{ ?c, 5 }, { ?a, 4 }, { ?b, 3 }]</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="parse/1">
+  
+  <div class="detail-header">
+    <a href="#parse/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">parse(list)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Counts occurences of letters, sorts them by sum.</p>
+<h2 id="parse/1-examples" class="section-heading">
+  <a href="#parse/1-examples" class="hover-link"><i class="icon-link"></i></a>
+  Examples
+</h2>
+
+<pre><code class="iex elixir">iex&gt; Mix.Tasks.Day6.parse(&#39;aaaacccccbb&#39;)
+[{ ?c, 5 }, { ?a, 4 }, { ?b, 2 }]</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="run/1">
+  
+  <div class="detail-header">
+    <a href="#run/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">run(args)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>A task needs to implement <code class="inline">run</code> which receives
+a list of command line args.</p>
+<p>Callback implementation for <a href="https://hexdocs.pm/mix/Mix.Task.html#c:run/1"><code class="inline">Mix.Task.run/1</code></a>.</p>
+
+  </section>
+</div>
+<div class="detail" id="transpose/1">
+  
+  <div class="detail-header">
+    <a href="#transpose/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">transpose(list)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Tranposes a matrix. Think of: Flips rows and columns in a spreadsheet.</p>
+<h2 id="transpose/1-examples" class="section-heading">
+  <a href="#transpose/1-examples" class="hover-link"><i class="icon-link"></i></a>
+  Examples
+</h2>
+
+<pre><code class="iex elixir">iex&gt; Mix.Tasks.Day6.transpose([&#39;abc&#39;, &#39;def&#39;, &#39;ghi&#39;])
+[&#39;adg&#39;, &#39;beh&#39;, &#39;cfi&#39;]</code></pre>
+
+  </section>
+</div>
+
+        </section>
+      
+
+      
+
+      
+          <footer class="footer">
+        <p>
+          <span class="line">
+            Built using
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" rel="help" target="_blank">ExDoc</a> (v0.14.5),
+          </span>
+          <span class="line">
+            designed by
+            <a href="https://twitter.com/dignifiedquire" target="_blank" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+            </span>
+        </p>
+        <button class="night-mode-toggle" />
+      </footer>
+    </div>
+  </div>
+</section>
+</div>
+  <script src="dist/app-4aef34ad5f.js"></script>
+  </body>
+</html>
+

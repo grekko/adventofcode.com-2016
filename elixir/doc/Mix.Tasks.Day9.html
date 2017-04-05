@@ -1,0 +1,359 @@
+    <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.14.5">
+    <title>Mix.Tasks.Day9 – advent_of_code v0.1.0</title>
+    <link rel="stylesheet" href="dist/app-a07cea761b.css" />
+    
+    <script src="dist/sidebar_items-655f2d9970.js"></script>
+  </head>
+  <body data-type="modules">
+    <script>if(localStorage.getItem('night-mode')) document.body.className += ' night-mode';</script>
+
+    <div class="main">
+<button class="sidebar-toggle">
+  <i class="icon-menu"></i>
+</button>
+<section class="sidebar">
+
+  
+  <a href="api-reference.html" class="sidebar-projectLink">
+    <div class="sidebar-projectDetails">
+      <h1 class="sidebar-projectName">
+        advent_of_code
+      </h1>
+      <h2 class="sidebar-projectVersion">
+        v0.1.0
+      </h2>
+    </div>
+    
+  </a>
+
+  <div class="sidebar-search">
+    <i class="icon-search"></i>
+    <input type="text" class="sidebar-searchInput" placeholder="search" autocomplete="off" />
+  </div>
+
+  <ul class="sidebar-listNav">
+    <li><a id="extras-list" href="#full-list">Pages</a></li>
+
+    
+      <li><a id="modules-list" href="#full-list">Modules</a></li>
+    
+
+    
+
+    
+  </ul>
+  <div class="gradient"></div>
+  <ul id="full-list" class="sidebar-fullList"></ul>
+</section>
+
+<section class="content">
+  <div class="content-outer">
+    <div id="content" class="content-inner">
+
+
+      <h1>
+        <small class="visible-xs">advent_of_code v0.1.0</small>
+        Mix.Tasks.Day9
+        
+        
+      </h1>
+
+      
+
+      
+        <section id="summary" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#summary">
+              <i class="icon-link"></i>
+            </a>
+            Summary
+          </h1>
+          
+
+          
+  <div class="summary-functions summary">
+    <h2>
+      <a href="#functions">Functions</a>
+    </h2>
+    <div class="summary-row">
+  <div class="summary-signature">
+    <a href="#apply_marker/1">apply_marker(map)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Extracts the main three components of the currently given string</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#decompress/1">decompress(string)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Processes a compressed string and returns the decompressed version</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#deep_decompress/1">deep_decompress(string)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Deep decompress</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#deep_decompress_length/1">deep_decompress_length(string)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Get deep decompress length</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#extract_marker/1">extract_marker(string)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Extracts the main three components of the currently given string</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#run/1">run(args)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>A task needs to implement <code class="inline">run</code> which receives
+a list of command line args</p>
+</div>
+  
+</div>
+
+  </div>
+
+
+          
+
+          
+
+        </section>
+      
+
+      
+
+      
+        <section id="functions" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#functions">
+              <i class="icon-link"></i>
+            </a>
+            Functions
+          </h1>
+          <div class="detail" id="apply_marker/1">
+  
+  <div class="detail-header">
+    <a href="#apply_marker/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">apply_marker(map)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Extracts the main three components of the currently given string.</p>
+<h2 id="apply_marker/1-examples" class="section-heading">
+  <a href="#apply_marker/1-examples" class="hover-link"><i class="icon-link"></i></a>
+  Examples
+</h2>
+
+<pre><code class="iex elixir">iex&gt; Mix.Tasks.Day9.apply_marker(%{ result: &quot;&quot;, length: 1, times: 5, rest: &quot;ax&quot; })
+%{ result: &quot;aaaaa&quot;, rest: &quot;x&quot; }
+
+iex&gt; Mix.Tasks.Day9.apply_marker(%{ result: &quot;b&quot;, length: 1, times: 5, rest: &quot;ax&quot; })
+%{ result: &quot;baaaaa&quot;, rest: &quot;x&quot; }
+
+iex&gt; Mix.Tasks.Day9.apply_marker(%{ result: &quot;b&quot;, length: 2, times: 5, rest: &quot;ax&quot; })
+%{ result: &quot;baxaxaxaxax&quot;, rest: &quot;&quot; }</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="decompress/1">
+  
+  <div class="detail-header">
+    <a href="#decompress/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">decompress(string)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Processes a compressed string and returns the decompressed version.</p>
+<h2 id="decompress/1-examples" class="section-heading">
+  <a href="#decompress/1-examples" class="hover-link"><i class="icon-link"></i></a>
+  Examples
+</h2>
+
+<pre><code class="iex elixir">iex&gt; Mix.Tasks.Day9.decompress(&quot;A(1x5)BC&quot;)
+&quot;ABBBBBC&quot;
+
+iex&gt; Mix.Tasks.Day9.decompress(&quot;(3x3)XYZ&quot;)
+&quot;XYZXYZXYZ&quot;
+
+iex&gt; Mix.Tasks.Day9.decompress(&quot;A(2x2)BCD(2x2)EFG&quot;)
+&quot;ABCBCDEFEFG&quot;
+
+iex&gt; Mix.Tasks.Day9.decompress(&quot;(6x1)(1x3)A&quot;)
+&quot;(1x3)A&quot;
+
+iex&gt; Mix.Tasks.Day9.decompress(&quot;X(8x2)(3x3)ABCY&quot;)
+&quot;X(3x3)ABC(3x3)ABCY&quot;
+
+iex&gt; Mix.Tasks.Day9.decompress(&quot;X(10x1)1234567890&quot;)
+&quot;X1234567890&quot;
+
+iex&gt; Mix.Tasks.Day9.decompress(&quot;X(1x10)1&quot;)
+&quot;X1111111111&quot;</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="deep_decompress/1">
+  
+  <div class="detail-header">
+    <a href="#deep_decompress/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">deep_decompress(string)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Deep decompress.</p>
+<h2 id="deep_decompress/1-examples" class="section-heading">
+  <a href="#deep_decompress/1-examples" class="hover-link"><i class="icon-link"></i></a>
+  Examples
+</h2>
+
+<pre><code class="iex elixir">iex&gt; Mix.Tasks.Day9.deep_decompress(&quot;X(8x2)(3x3)ABCY&quot;)
+&quot;XABCABCABCABCABCABCY&quot;</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="deep_decompress_length/1">
+  
+  <div class="detail-header">
+    <a href="#deep_decompress_length/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">deep_decompress_length(string)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Get deep decompress length.</p>
+<h2 id="deep_decompress_length/1-examples" class="section-heading">
+  <a href="#deep_decompress_length/1-examples" class="hover-link"><i class="icon-link"></i></a>
+  Examples
+</h2>
+
+<pre><code class="iex elixir">iex&gt; Mix.Tasks.Day9.deep_decompress_length(&quot;X(8x2)(3x3)ABCY&quot;)
+20
+
+iex&gt; Mix.Tasks.Day9.deep_decompress_length(&quot;(27x12)(20x12)(13x14)(7x10)(1x12)A&quot;)
+241920
+
+iex&gt; Mix.Tasks.Day9.deep_decompress_length(&quot;(25x3)(3x3)ABC(2x3)XY(5x2)PQRSTX(18x9)(3x2)TWO(5x7)SEVEN&quot;)
+445</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="extract_marker/1">
+  
+  <div class="detail-header">
+    <a href="#extract_marker/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">extract_marker(string)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Extracts the main three components of the currently given string.</p>
+<h2 id="extract_marker/1-examples" class="section-heading">
+  <a href="#extract_marker/1-examples" class="hover-link"><i class="icon-link"></i></a>
+  Examples
+</h2>
+
+<pre><code class="iex elixir">iex&gt; Mix.Tasks.Day9.extract_marker(&quot;X12(3x2)Ab4(1x1)123&quot;)
+%{ result: &quot;X12&quot;, length: 3, times: 2, rest: &quot;Ab4(1x1)123&quot; }
+
+iex&gt; Mix.Tasks.Day9.extract_marker(&quot;(3x2)Ab4(1x1)123&quot;)
+%{ result: &quot;&quot;, length: 3, times: 2, rest: &quot;Ab4(1x1)123&quot; }
+
+iex&gt; Mix.Tasks.Day9.extract_marker(&quot;(11x22)Ab4(1x1)123&quot;)
+%{ result: &quot;&quot;, length: 11, times: 22, rest: &quot;Ab4(1x1)123&quot; }
+
+iex&gt; Mix.Tasks.Day9.extract_marker(&quot;A&quot;)
+%{ result: &quot;A&quot;, length: 0, times: 0, rest: &quot;&quot; }</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="run/1">
+  
+  <div class="detail-header">
+    <a href="#run/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">run(args)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>A task needs to implement <code class="inline">run</code> which receives
+a list of command line args.</p>
+<p>Callback implementation for <a href="https://hexdocs.pm/mix/Mix.Task.html#c:run/1"><code class="inline">Mix.Task.run/1</code></a>.</p>
+
+  </section>
+</div>
+
+        </section>
+      
+
+      
+
+      
+          <footer class="footer">
+        <p>
+          <span class="line">
+            Built using
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" rel="help" target="_blank">ExDoc</a> (v0.14.5),
+          </span>
+          <span class="line">
+            designed by
+            <a href="https://twitter.com/dignifiedquire" target="_blank" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+            </span>
+        </p>
+        <button class="night-mode-toggle" />
+      </footer>
+    </div>
+  </div>
+</section>
+</div>
+  <script src="dist/app-4aef34ad5f.js"></script>
+  </body>
+</html>
+

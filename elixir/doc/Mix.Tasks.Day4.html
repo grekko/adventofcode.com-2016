@@ -1,0 +1,259 @@
+    <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.14.5">
+    <title>Mix.Tasks.Day4 – advent_of_code v0.1.0</title>
+    <link rel="stylesheet" href="dist/app-a07cea761b.css" />
+    
+    <script src="dist/sidebar_items-655f2d9970.js"></script>
+  </head>
+  <body data-type="modules">
+    <script>if(localStorage.getItem('night-mode')) document.body.className += ' night-mode';</script>
+
+    <div class="main">
+<button class="sidebar-toggle">
+  <i class="icon-menu"></i>
+</button>
+<section class="sidebar">
+
+  
+  <a href="api-reference.html" class="sidebar-projectLink">
+    <div class="sidebar-projectDetails">
+      <h1 class="sidebar-projectName">
+        advent_of_code
+      </h1>
+      <h2 class="sidebar-projectVersion">
+        v0.1.0
+      </h2>
+    </div>
+    
+  </a>
+
+  <div class="sidebar-search">
+    <i class="icon-search"></i>
+    <input type="text" class="sidebar-searchInput" placeholder="search" autocomplete="off" />
+  </div>
+
+  <ul class="sidebar-listNav">
+    <li><a id="extras-list" href="#full-list">Pages</a></li>
+
+    
+      <li><a id="modules-list" href="#full-list">Modules</a></li>
+    
+
+    
+
+    
+  </ul>
+  <div class="gradient"></div>
+  <ul id="full-list" class="sidebar-fullList"></ul>
+</section>
+
+<section class="content">
+  <div class="content-outer">
+    <div id="content" class="content-inner">
+
+
+      <h1>
+        <small class="visible-xs">advent_of_code v0.1.0</small>
+        Mix.Tasks.Day4
+        
+        
+      </h1>
+
+      
+
+      
+        <section id="summary" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#summary">
+              <i class="icon-link"></i>
+            </a>
+            Summary
+          </h1>
+          
+
+          
+  <div class="summary-functions summary">
+    <h2>
+      <a href="#functions">Functions</a>
+    </h2>
+    <div class="summary-row">
+  <div class="summary-signature">
+    <a href="#char_frequency/1">char_frequency(word)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Transforms horizontal triangles to vertical triangles</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#parse/1">parse(string)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Parses string, extracting its sector id, checksum and char frequency and validity</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#run/1">run(args)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>A task needs to implement <code class="inline">run</code> which receives
+a list of command line args</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#translate_word/2">translate_word(word, translate_by)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Parses string, extracting its sector id, checksum and char frequency and validity</p>
+</div>
+  
+</div>
+
+  </div>
+
+
+          
+
+          
+
+        </section>
+      
+
+      
+
+      
+        <section id="functions" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#functions">
+              <i class="icon-link"></i>
+            </a>
+            Functions
+          </h1>
+          <div class="detail" id="char_frequency/1">
+  
+  <div class="detail-header">
+    <a href="#char_frequency/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">char_frequency(word)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Transforms horizontal triangles to vertical triangles.</p>
+<h2 id="char_frequency/1-examples" class="section-heading">
+  <a href="#char_frequency/1-examples" class="hover-link"><i class="icon-link"></i></a>
+  Examples
+</h2>
+
+<pre><code class="iex elixir">iex&gt; Mix.Tasks.Day4.char_frequency(&quot;not-a-real-room&quot;)
+[{ ?o, 3 }, { ?a, 2 }, { ?r, 2 }, { ?e, 1 }, { ?l, 1 }, { ?m, 1 }, { ?n, 1 }, { ?t, 1 }]</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="parse/1">
+  
+  <div class="detail-header">
+    <a href="#parse/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">parse(string)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Parses string, extracting its sector id, checksum and char frequency and validity</p>
+<h2 id="parse/1-examples" class="section-heading">
+  <a href="#parse/1-examples" class="hover-link"><i class="icon-link"></i></a>
+  Examples
+</h2>
+
+<pre><code class="iex elixir">iex&gt; Mix.Tasks.Day4.parse(&quot;aaaaa-bbb-z-y-x-123[abxyz]&quot;)
+%{chars: &quot;aaaaa-bbb-z-y-x&quot;, char_frequency: [{?a, 5}, {?b, 3}, {?x, 1}, {?y, 1}, {?z, 1}], checksum: &#39;abxyz&#39;, calculated_checksum: &#39;abxyz&#39;, sector_id: 123, valid: true}
+
+iex&gt; Mix.Tasks.Day4.parse(&quot;bxaxipgn-vgpst-qphzti-rdcipxcbtci-635[ipctx]&quot;)
+%{chars: &quot;bxaxipgn-vgpst-qphzti-rdcipxcbtci&quot;, char_frequency: [{?i, 4}, {?p, 4}, {?c, 3}, {?t, 3}, {?x, 3}], checksum: &#39;ipctx&#39;, calculated_checksum: &#39;ipctx&#39;, sector_id: 635, valid: true}</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="run/1">
+  
+  <div class="detail-header">
+    <a href="#run/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">run(args)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>A task needs to implement <code class="inline">run</code> which receives
+a list of command line args.</p>
+<p>Callback implementation for <a href="https://hexdocs.pm/mix/Mix.Task.html#c:run/1"><code class="inline">Mix.Task.run/1</code></a>.</p>
+
+  </section>
+</div>
+<div class="detail" id="translate_word/2">
+  
+  <div class="detail-header">
+    <a href="#translate_word/2" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">translate_word(word, translate_by)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Parses string, extracting its sector id, checksum and char frequency and validity</p>
+<h2 id="translate_word/2-examples" class="section-heading">
+  <a href="#translate_word/2-examples" class="hover-link"><i class="icon-link"></i></a>
+  Examples
+</h2>
+
+<pre><code class="iex elixir">iex&gt; Mix.Tasks.Day4.translate_word(&quot;qzmt-zixmtkozy-ivhz&quot;, 343)
+%{ name: &quot;very encrypted name&quot;, id: 343 }</code></pre>
+
+  </section>
+</div>
+
+        </section>
+      
+
+      
+
+      
+          <footer class="footer">
+        <p>
+          <span class="line">
+            Built using
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" rel="help" target="_blank">ExDoc</a> (v0.14.5),
+          </span>
+          <span class="line">
+            designed by
+            <a href="https://twitter.com/dignifiedquire" target="_blank" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+            </span>
+        </p>
+        <button class="night-mode-toggle" />
+      </footer>
+    </div>
+  </div>
+</section>
+</div>
+  <script src="dist/app-4aef34ad5f.js"></script>
+  </body>
+</html>
+
