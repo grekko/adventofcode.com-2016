@@ -56,5 +56,16 @@ defmodule Mix.Tasks.Day10 do
     IO.puts("---------------------------------")
     IO.puts("---------------------------------")
   end
+
+  @doc """
+  Maps initial values to bots
+
+
+  ## Examples
+
+      iex> Mix.Tasks.Day10.extract_bots("value 61 goes to bot 119\nbot 119 gives low to bot 178 and high to bot 29")
+      %{ bot119: %{ values: [61], gives_low_to: :bot178, gives_high_to: :bot29 }}
+  """
+
 end
 
